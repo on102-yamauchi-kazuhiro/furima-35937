@@ -1,8 +1,10 @@
 <%= render "shared/second-header"%>
 
 <%# 「モデル名」にはUserモデルであれば@userを渡しましょう。「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
-<%= form_with model: モデル名, url: 新規登録機能へのパス, class: 'registration-main', local: true do |f| %>
+<%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
 <%# //「モデル名」にはUserモデルであれば@userを渡しましょう。「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
+
+<%# ヘッダー %>
 <div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
@@ -14,20 +16,25 @@
   <%# render 'shared/error_messages', model: f.object %>
   <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
+  <%# ユーザー名 %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">ニックネーム</label>
       <span class="indispensable">必須</span>
     </div>
-    <%= f.text_area :hoge, class:"input-default", id:"nickname", placeholder:"例) furima太郎", maxlength:"40" %>
+    <%= f.text_area :name, class:"input-default", id:"nickname", placeholder:"例) furima太郎", maxlength:"40" %>
   </div>
+
+  <%# メールアドレス %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">メールアドレス</label>
       <span class="indispensable">必須</span>
     </div>
-    <%= f.email_field :hoge, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
+    <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
   </div>
+
+  <%# パスワード %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">パスワード</label>
@@ -43,6 +50,8 @@
     </div>
     <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい" %>
   </div>
+
+  <%# 本人確認 %>
   <div class="form-group">
     <p class='form-info-header'>
       本人確認
@@ -51,6 +60,8 @@
       安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
     </p>
   </div>
+
+  <%# 個人情報 %>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">お名前(全角)</label>
@@ -91,6 +102,8 @@
     </div>
     <p class='info-text'>※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。</p>
   </div>
+
+  <%# 会員登録ボタン %>
   <div class="form-group">
     <h2 class='form-bottom-text'>
       「会員登録」のボタンを押すことにより、
