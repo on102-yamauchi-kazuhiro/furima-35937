@@ -2,15 +2,16 @@
 
 ## users table
 
-| Column             | Type   | Options     |
-|--------------------|--------|-------------|
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birth_date         | string | null: false |
+| Column             | Type   | Options                   |
+|--------------------|--------|---------------------------|
+| user_name          | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_date         | string | null: false               |
 
 
 
@@ -18,6 +19,20 @@
 
 * has_many :products
 * has_many :orders
+
+
+## address table
+
+| Column             | Type   | Options     |
+|--------------------|--------|-------------|
+| postal_code        | string | null: false |
+| city               | string | null: false |
+| address            | string | null: false |
+
+
+### Association
+
+belongs_to :user
 
 
 ## providers table
@@ -42,18 +57,16 @@
 | condition_id      | integer    | null: false       |
 | price             | integer    | null: false       |
 | trading_status_id | integer    | null: false       |
-| category_id       | integer    | foreign_key: true |
-| shipping_id       | integer    | foreign_key: true |
-| user_id           | integer    | foreign_key: true |
+| category_id       | integer    |-------------------|
+| shipping_id       | integer    |-------------------|
+| user_id           | references | foreign_key: true |
+| shipping_address  | references | foreign_key: true |
 
 
 ### Association
 
 * belongs_to :user
-* belongs_to :category
-* has_many :product_images
 * has_one :order
-* has_one :shipping
 
 
 ## comments table
@@ -71,10 +84,10 @@
 
 ## orders table
 
-| Column     | Type       | Options           |
-|------------|------------|-------------------|
-| user_id    | references | foreign_key: true |
-| product_id | references | foreign_key: true |
+| Column  | Type       | Options           |
+|---------|------------|-------------------|
+| user    | references | foreign_key: true |
+| product | references | foreign_key: true |
 
 * belongs_to :user
 * belongs_to :product
