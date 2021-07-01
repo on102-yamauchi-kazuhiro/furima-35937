@@ -25,16 +25,18 @@
 | Column             | Type       | Options           |
 |--------------------|------------|-------------------|
 | postal_code        | string     | null: false       |
-| prefecture         | string     | null: false       |
+| prefecture_id      | integer    | null: false       |
 | city               | string     | null: false       |
 | address            | string     | null: false       |
 | building_name      | string     | null: false       |
 | phone_number       | string     | null: false       |
+| order              | references | foreign_key: true |
 
 
 ### Association
 
 * belongs_to :user
+* has_one :order
 
 
 ## products table
@@ -47,7 +49,7 @@
 | price             | integer    | null: false       |
 | trading_status_id | integer    | null: false       |
 | category_id       | integer    | null: false       |
-| shipping_fee      | integer    | null: false       |
+| shipping_fee_id   | integer    | null: false       |
 | prefecture_id     | integer    | null: false       |
 | user              | references | foreign_key: true |
 
