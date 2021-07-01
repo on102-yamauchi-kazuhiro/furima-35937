@@ -28,15 +28,14 @@
 | prefecture_id      | integer    | null: false       |
 | city               | string     | null: false       |
 | address            | string     | null: false       |
-| building_name      | string     | null: false       |
+| building_name      | string     |-------------------|
 | phone_number       | string     | null: false       |
 | order              | references | foreign_key: true |
 
 
 ### Association
 
-* belongs_to :user
-* has_one :order
+* belongs_to :order
 
 
 ## products table
@@ -62,10 +61,11 @@
 
 ## comments table
 
-| Column | Type       | Options           |
-|--------|------------|-------------------|
-| text   | text       | null: false       |
-| user   | references | foreign_key: true |
+| Column  | Type       | Options           |
+|---------|------------|-------------------|
+| text    | text       | null: false       |
+| user    | references | foreign_key: true |
+| product | references | foreign_key: true |
 
 
 ### Association
@@ -83,3 +83,4 @@
 
 * belongs_to :user
 * belongs_to :product
+* has_one :address
