@@ -27,8 +27,13 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Description can't be blank")
       end
-      it 'categoryが空では登録できない' do
+      it 'category_idが空では登録できない' do
         @product.category_id = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'category_idが「1」では登録できない' do
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
@@ -37,8 +42,18 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Condition can't be blank")
       end
+      it 'condition_idが「1」では登録できない' do
+        @product.condition_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Condition can't be blank")
+      end
       it 'shipping_fee_idが空では登録できない' do
         @product.shipping_fee_id = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Shipping fee can't be blank")
+      end
+      it 'shipping_fee_idが「1」では登録できない' do
+        @product.shipping_fee_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping fee can't be blank")
       end
@@ -47,8 +62,18 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it 'prefecture_idが「1」では登録できない' do
+        @product.prefecture_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it 'trading_status_idが空では登録できない' do
         @product.trading_status_id = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Trading status can't be blank")
+      end
+      it 'trading_status_idが「1」では登録できない' do
+        @product.trading_status_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Trading status can't be blank")
       end
@@ -60,12 +85,27 @@ RSpec.describe Product, type: :model do
       it 'priceが300円以下では登録できない' do
         @product.price = '150'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price must be in between ¥300 to ¥9,999,999')
+        expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが9,999,999円以上では登録できない' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include('Price must be in between ¥300 to ¥9,999,999')
+        expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+      it 'priceが半角英数字混合では出品できない' do
+        @product.price = '10000a'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price is not a number')
+      end
+      it 'priceが半角英字では出品できない' do
+        @product.price = 'abcde'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price is not a number')
+      end
+      it 'priceが全角文字では出品できない' do
+        @product.price = '１０００'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price is not a number')
       end
     end
   end
