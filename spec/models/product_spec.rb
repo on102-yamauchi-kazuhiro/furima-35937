@@ -83,12 +83,12 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが300円以下では登録できない' do
-        @product.price = '150'
+        @product.price = 150
         @product.valid?
         expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが9,999,999円以上では登録できない' do
-        @product.price = '10000000'
+        @product.price = 10000000
         @product.valid?
         expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
