@@ -107,6 +107,11 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Price is not a number')
       end
+      it 'ユーザーが紐づいていなければ投稿できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
