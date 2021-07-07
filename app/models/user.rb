@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :products
 
   with_options presence: true do
     validates :user_name
@@ -19,8 +21,10 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])\w{6,}\z/i
-  with_options presence: true, format: { with: VALID_PASSWORD_REGEX, message: "must include both letters and numbers (half-width)"} do
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)\w{6,}\z/i
+  with_options presence: true,
+               format: { with: VALID_PASSWORD_REGEX,
+                         message: 'must include both letters and numbers (half-width)' } do
     validates :password
   end
 end
