@@ -19,8 +19,10 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])\w{6,}\z/i
-  with_options presence: true, format: { with: VALID_PASSWORD_REGEX, message: "must include both letters and numbers (half-width)"} do
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)\w{6,}\z/i
+  with_options presence: true,
+               format: { with: VALID_PASSWORD_REGEX,
+                         message: 'must include both letters and numbers (half-width)' } do
     validates :password
   end
 end

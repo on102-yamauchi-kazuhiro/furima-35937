@@ -8,7 +8,9 @@ class Product < ApplicationRecord
     validates :product_name
     validates :description
     validates :user
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "must be in between ¥300 to ¥9,999,999" }
+    validates :price,
+              numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                              message: 'must be in between ¥300 to ¥9,999,999' }
   end
 
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do

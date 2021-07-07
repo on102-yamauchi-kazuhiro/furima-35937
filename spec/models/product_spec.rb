@@ -6,7 +6,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe '商品の新規登録' do
-    context "商品の新規登録ができるとき" do
+    context '商品の新規登録ができるとき' do
       it '商品情報が存在すれば商品は保存される' do
         expect(@product).to be_valid
       end
@@ -21,7 +21,7 @@ RSpec.describe Product, type: :model do
         @product.product_name = '' # product_nameの値を空にする
         @product.valid?
         expect(@product.errors.full_messages).to include("Product name can't be blank")
-      end     
+      end
       it 'descriptionが空では登録できない' do
         @product.description = '' # descriptionの値を空にする
         @product.valid?
@@ -60,12 +60,12 @@ RSpec.describe Product, type: :model do
       it 'priceが300円以下では登録できない' do
         @product.price = '150'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be in between ¥300 to ¥9,999,999")
+        expect(@product.errors.full_messages).to include('Price must be in between ¥300 to ¥9,999,999')
       end
       it 'priceが9,999,999円以上では登録できない' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be in between ¥300 to ¥9,999,999")
+        expect(@product.errors.full_messages).to include('Price must be in between ¥300 to ¥9,999,999')
       end
     end
   end
