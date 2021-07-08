@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
+  extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: :index
   
   def index
-    @products = Product.includes(:user)
+    @products = Product.includes(:user).order("created_at DESC")
   end
 
   def new
