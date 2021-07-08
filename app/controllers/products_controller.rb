@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:edit, :show]
-  before_action :check_user, only: [:edit, :update, :destroy]
   
   def index
     @products = Product.includes(:user).order("created_at DESC")
@@ -43,10 +42,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-  end
-
-  def check_user
-    redirect_to root_path if current_user.id != @item.user.id || @item.order
   end
 
 end
