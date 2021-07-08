@@ -126,11 +126,12 @@
     <div class="subtitle" >
       新規投稿商品
     </div>
+
     <ul class='product-lists'>
     <% unless @products.empty? %>
       <% @products.each do |product| %>
       <li class='list'>
-        <%= link_to products_path model: :post do %>
+        <%= link_to product_path(product.id) do %>
         <div class='product-img-content'>
           <%= image_tag product.image, class: "product-img" %>
 
