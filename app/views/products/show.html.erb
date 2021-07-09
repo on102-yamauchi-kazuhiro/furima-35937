@@ -28,7 +28,7 @@
         <%= link_to "商品の編集", edit_product_path(@product.id), class: "product-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", product_path(@product.id), method: :delete, class:"product-destroy" %>
-      <% elsif current_user.id != @product.user_id %>
+      <% else current_user.id != @product.user_id %>
         <%= link_to "購入画面に進む", "#" ,class:"product-red-btn"%>
       <% end %>
     <% end %>
@@ -99,9 +99,9 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-product"><%= "商品のカテゴリー名" %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+
+  <a href="#" class="another-product"><%= @product.category.name %>商品をもっと見る</a>
+
 </div>
 
 <%= render "shared/footer" %>

@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_product, only: [:edit, :show]
+  before_action :product, only: [:edit, :show]
   
   def index
     @products = Product.includes(:user).order("created_at DESC")
@@ -20,10 +20,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def show
-    @product = Product.find(params[:id])
-  end
-
   private
 
   def product_params
@@ -40,7 +36,7 @@ class ProductsController < ApplicationController
   #   product.destroy
   # end
 
-  def set_product
+  def product
     @product = Product.find(params[:id])
   end
 end
