@@ -7,9 +7,9 @@ app/assets/stylesheets/products/new.css %>
   </header>
   <div class="products-sell-main">
     <h2 class="products-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
+    <%= form_with model: @product, local: true do |f| %>
 
-    <%# render 'shared/error_messages', model: f.object %>
+    <% render 'shared/error_messages', model: f.object %>
 
     <%# 商品画像 %>
     <div class="img-upload">
@@ -21,7 +21,7 @@ app/assets/stylesheets/products/new.css %>
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :hoge, id:"product-image" %>
+        <%= f.file_field :image, id:"product-image" %>
       </div>
     </div>
     <%# /商品画像 %>
@@ -140,7 +140,7 @@ app/assets/stylesheets/products/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', root_path, class:"back-btn" %>
+      <%=link_to 'もどる', product_path(@product), class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
