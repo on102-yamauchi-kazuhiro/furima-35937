@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :product, only: [:show]
+  before_action :product, only: [:edit, :show, :update]
+  before_action :check_user, only: [:edit, :update]
   
   def index
     @products = Product.includes(:user).order("created_at DESC")
@@ -20,6 +21,25 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to product_path(@product)
+    else
+      render :edit
+    end
+  end
+
+  def show
+  end
+
+  # def destroy
+  #   product = Product.find(params[:id])
+  #   product.destroy
+  # end
+  
   private
 
   def product_params
@@ -27,16 +47,11 @@ class ProductsController < ApplicationController
                                     :prefecture_id, :trading_status_id, :price).merge(user_id: current_user.id)
   end
 
-  # def edit
-  #   @product = Product.find(params[:id])
-  # end
-
-  # def destroy
-  #   product = Product.find(params[:id])
-  #   product.destroy
-  # end
-
   def product
     @product = Product.find(params[:id])
+  end
+
+  def check_user
+    redirect_to root_path if current_user.id != @product.user.id
   end
 end
