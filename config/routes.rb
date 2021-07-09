@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   # localhost:3000にアクセスしたときにproductsコントローラーのindexアクションをうごかすための記述を書く。
   root to: 'products#index'
-  resources :products, only: [:index, :new, :create, :show]
+  resources :products, only: [:index, :new, :create, :edit]
 end

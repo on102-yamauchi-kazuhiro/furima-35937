@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :product, only: [:show]
+  before_action :product, only: [:edit, :show]
   
   def index
     @products = Product.includes(:user).order("created_at DESC")
@@ -27,9 +27,9 @@ class ProductsController < ApplicationController
                                     :prefecture_id, :trading_status_id, :price).merge(user_id: current_user.id)
   end
 
-  # def edit
-  #   @product = Product.find(params[:id])
-  # end
+  def edit
+    @product = Product.find(params[:id])
+  end
 
   # def destroy
   #   product = Product.find(params[:id])
