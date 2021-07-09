@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   extend ActiveHash::Associations::ActiveRecordExtensions
   before_action :authenticate_user!, except: [:index, :show]
   before_action :product, only: [:edit, :show, :update]
-  before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update]
   
   def index
     @products = Product.includes(:user).order("created_at DESC")
@@ -19,10 +19,6 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @product = Product.find(params[:id])
   end
 
   def update
