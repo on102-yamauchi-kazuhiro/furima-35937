@@ -9,14 +9,12 @@
     <div class="product-img-content">
       <%= image_tag @product.image ,class:"product-box-img" %>
 
-      <%# 売り切れ表示 %>
-      <% if @product.order %>
-        <div class="sold-out">
-          <span>Sold Out!!</span>
-        </div>
-      <% end %>
-      <%# /売り切れ表示 %>
-      
+      <%# 売り切れ表示%>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div> 
+      <%# /売り切れ表示%>
+
     </div>
     <div class="product-price-box">
       <span class="product-price">
