@@ -8,11 +8,15 @@
     </h2>
     <div class="product-img-content">
       <%= image_tag @product.image ,class:"product-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div> %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+
+      <%# 売り切れ表示 %>
+      <% if @product.order %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
+      <%# /売り切れ表示 %>
+      
     </div>
     <div class="product-price-box">
       <span class="product-price">
