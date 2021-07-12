@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :product
+  before_action :set_product
   before_action :check_user
 
   def index
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     if @order_address.valid?
       pay_product
       @order_address.save
-      redirect_to root_path
+      return redirect_to root_path
     else
       render :index
     end
@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def product
+  def set_product
     @product = Product.find(params[:product_id])
   end
 
@@ -30,15 +30,15 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_address).permit(:postal_code, :prefecture_id, :city, :address, :building_name,
-                                          :phone_number).merge(user_id: current_user.id, product_id: @product.id, card_number: params[:card_number])
+                                          :phone_number).merge(user_id: current_user.id, product_id: @product.id, token: params[:token])
   end
 
   def pay_product
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: @product.price,
-      card: order_params[:card_number],
-      currency: 'jpy'
+      amount: @product.price,            # 商品の値段
+      card: order_params[:token], # カードトークン
+      currency: 'jpy'                    # 通貨の種類（日本円）
     )
   end
 end
