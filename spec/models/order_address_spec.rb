@@ -4,13 +4,18 @@ RSpec.describe OrderAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
     product = FactoryBot.create(:product)
-    @order_address = FactoryBot.build(:order_address)
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, product_id: product.id)
     sleep(0.1)
   end
 
   describe '商品購入機能' do
     context '商品が購入できるとき' do
       it 'すべての情報が正しく入力されていれば購入できる' do
+        expect(@order_address).to be_valid
+      end
+
+      it '建物名が空でも登録できる' do
+        @order_address.building_name = ''
         expect(@order_address).to be_valid
       end
     end
