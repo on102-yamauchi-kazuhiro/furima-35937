@@ -10,7 +10,7 @@ class OrderAddress
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{1,11}\z/, message: 'is invalid. Please enter 11-digit number.' }
-    validates :token
+    validates :token, format: { with: /\A\d{14,16}\z/, message: 'is invalid'}
   end
 
   def save

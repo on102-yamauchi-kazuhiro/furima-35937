@@ -16,7 +16,7 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     context '商品が購入できないとき' do
-      it '郵便番号が空だと登録できない' do
+      it '郵便番号が空では登録できない' do
         @order_address.postal_code = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
@@ -28,19 +28,19 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
 
-      it '都道府県が空だと登録できない' do
+      it '都道府県が空では登録できない' do
         @order_address.prefecture_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-      it '市区町村が空だと登録できない' do
+      it '市区町村が空では登録できない' do
         @order_address.city = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("City can't be blank")
       end
 
-      it '番地が空だと登録できない' do
+      it '番地が空では登録できない' do
         @order_address.address = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Address can't be blank")
@@ -70,16 +70,28 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 11-digit number.')
       end
 
-      it 'ユーザーが存在していないと登録できない' do
+      it 'ユーザーが空では登録できない' do
         @order_address.user_id = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
 
-      it '商品が存在していないと登録できない' do
+      it '商品が空では登録できない' do
         @order_address.product_id = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Product can't be blank")
+      end
+
+      it 'クレジットカード番号が空では登録できない' do
+        @order_address.token = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it 'クレジットカード番号の桁数が違うと登録できない' do
+        @order_address.token = '12345678901234567'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token is invalid")
       end
     end
   end
