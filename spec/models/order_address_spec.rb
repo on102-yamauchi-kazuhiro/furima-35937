@@ -87,12 +87,6 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
-
-      it 'クレジットカード番号の桁数が違うと登録できない' do
-        @order_address.token = '12345678901234567'
-        @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Token is invalid")
-      end
     end
   end
 end

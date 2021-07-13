@@ -14,9 +14,9 @@ const pay = () => {
       exp_year: `20${formData.get("order_address[expire_year]")}`,
       cvc: formData.get("order_address[card_cvc]"),
     };
+    console.log
 
     Payjp.createToken(card, (status, response) => {
-      console.log
       if (status == 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
