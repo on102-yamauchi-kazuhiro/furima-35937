@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address, user_id: user.id, product_id: product.id)
+    user = FactoryBot.create(:user)
+    product = FactoryBot.create(:product)
+    @order_address = FactoryBot.build(:order_address)
+    sleep(0.1)
   end
 
   describe '商品購入機能' do
@@ -26,7 +29,7 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it '都道府県が空だと登録できない' do
-        @order_address.prefecture = 1
+        @order_address.prefecture_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -74,9 +77,9 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it '商品が存在していないと登録できない' do
-        @order_address.item_id = ''
+        @order_address.product_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+        expect(@order_address.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
