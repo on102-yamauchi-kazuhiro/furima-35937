@@ -8,11 +8,15 @@
     </h2>
     <div class="product-img-content">
       <%= image_tag @product.image ,class:"product-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div> %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+
+      <%# 売り切れ表示%>
+      <% if @product.order %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div> 
+      <% end %>
+      <%# /売り切れ表示%>
+
     </div>
     <div class="product-price-box">
       <span class="product-price">
@@ -23,13 +27,13 @@
       </span>
     </div>
 
-    <% if user_signed_in?%>
+    <% if user_signed_in?  && !@product.order %>
       <% if current_user.id == @product.user_id %>
         <%= link_to "商品の編集", edit_product_path(@product.id), class: "product-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除する", product_path(@product.id), method: :delete, class:"product-destroy" %>
       <% else %>
-        <%= link_to "購入画面に進む", "#" ,class:"product-red-btn"%>
+        <%= link_to "購入画面に進む", product_orders_path(@product.id) ,class:"product-red-btn"%>
       <% end %>
     <% end %>
 
