@@ -60,19 +60,19 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号が11桁以内でないと登録できない' do
         @order_address.phone_number = '112233445566'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 11-digit number.')
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 10 or 11 digit number.')
       end
 
       it '電話番号が半角の数値でないと登録できない' do
         @order_address.phone_number = '１１２２３３４４５５６'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 11-digit number.')
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 10 or 11 digit number.')
       end
 
       it '電話番号は英数混合では登録できない' do
         @order_address.phone_number = '123a456b789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 11-digit number.')
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid. Please enter 10 or 11 digit number.')
       end
 
       it 'ユーザーが空では登録できない' do
