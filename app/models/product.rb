@@ -21,7 +21,7 @@ class Product < ApplicationRecord
               format: { with: /\A[0-9]+\z/}
   end
   
-  with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
+  with_options presence: true, numericality: { other_than: 1, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :shipping_fee_id
