@@ -78,13 +78,13 @@ RSpec.describe OrderAddress, type: :model do
       it 'ユーザーが空では登録できない' do
         @order_address.user_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Userを入力してください")
+        expect(@order_address.errors.full_messages).to include("ユーザーIDを入力してください")
       end
 
       it '商品が空では登録できない' do
         @order_address.product_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Productを入力してください")
+        expect(@order_address.errors.full_messages).to include("商品IDを入力してください")
       end
 
       it 'クレジットカード番号が空では登録できない' do

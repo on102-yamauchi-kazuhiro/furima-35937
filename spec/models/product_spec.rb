@@ -110,7 +110,7 @@ RSpec.describe Product, type: :model do
       it 'ユーザーが紐づいていなければ投稿できない' do
         @product.user = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include('Userを入力してください')
+        expect(@product.errors.full_messages).to include('ユーザーを入力してください')
       end
     end
   end
