@@ -9,11 +9,11 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = ProductsTag.new
   end
 
   def create
-    @product = Product.new(product_params)
+    @product = ProductTag.new(product_params)
     if @product.save
       redirect_to root_path
     else
@@ -39,7 +39,13 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to root_path
   end
-  
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
   private
 
   def product_params
