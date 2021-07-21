@@ -9,22 +9,30 @@ document.addEventListener('DOMContentLoaded', function() {
       imageElement.setAttribute('class', "image-element")
       let imageElementNum = document.querySelectorAll('.image-element').length
 
-      // 表示する画像を生成
-      const blobImage = document.createElement('img');
-      blobImage.setAttribute('src', blob);
-      blobImage.setAttribute('height', 150)
-      blobImage.setAttribute('class', 'image-list')
-
       // ファイル選択ボタンを生成
       const inputHTML = document.createElement('input')
       inputHTML.setAttribute('id', `product-image_${imageElementNum}`)
       inputHTML.setAttribute('name', 'product[images][]')
       inputHTML.setAttribute('type', 'file')
+      inputHTML.setAttribute('class', 'other-image-upload')
+      
+      // 表示する画像を生成
+      const blobImage = document.createElement('img');
+      blobImage.setAttribute('src', blob);
+      blobImage.setAttribute('height', 100)
+      blobImage.setAttribute('class', 'image-list')
       
       // 生成したHTMLの要素をブラウザに表示させる
       imageElement.appendChild(blobImage)
       imageElement.appendChild(inputHTML)
       ImageList.appendChild(imageElement)
+
+      inputHTML.addEventListener('change', (e) => {
+        file = e.target.files[0];
+        blob = window.URL.createObjectURL(file);
+
+        createImageHTML(blob)
+      })
     }
 
     document.getElementById('product-image').addEventListener('change', (e) => {
@@ -34,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // imageContent.remove();
     // }
 
-      const file = e.target.files[0];
-      const blob = window.URL.createObjectURL(file);
+      let file = e.target.files[0];
+      let blob = window.URL.createObjectURL(file);
 
       createImageHTML(blob)
     });

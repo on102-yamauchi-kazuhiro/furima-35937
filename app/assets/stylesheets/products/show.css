@@ -205,3 +205,24 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.product-other-img {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.images-mini {
+  width: 180px;
+  height: 180px;
+  margin: 5px;
+}
+
+.edit-images-mini {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+}
+
+.other-image-upload {
+  padding: 10px;
+}
