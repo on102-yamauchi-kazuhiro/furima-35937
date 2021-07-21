@@ -206,9 +206,11 @@
   font-size: 23px;
 }
 
-.product-other-img {
+.other-image-upload {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: 3vh 0;
 }
 
 .images-mini {
@@ -221,8 +223,4 @@
   width: 130px;
   height: 130px;
   margin: 5px;
-}
-
-.other-image-upload {
-  padding: 10px;
 }

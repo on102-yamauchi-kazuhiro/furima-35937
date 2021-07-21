@@ -244,3 +244,9 @@
   padding: 10px;
 }
 
+.other-image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 3vh 0;
+}
