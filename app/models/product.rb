@@ -9,10 +9,10 @@ class Product < ApplicationRecord
 
   belongs_to :user
   has_one :order
-  has_one_attached :image
+  has_many_attached :images
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :product_name
     validates :description
     validates :user

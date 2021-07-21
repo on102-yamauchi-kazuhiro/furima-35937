@@ -205,3 +205,22 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.other-image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 3vh 0;
+}
+
+.images-mini {
+  width: 180px;
+  height: 180px;
+  margin: 5px;
+}
+
+.edit-images-mini {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+}

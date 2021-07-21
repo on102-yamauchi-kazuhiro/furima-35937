@@ -133,7 +133,7 @@
       <li class='list'>
         <%= link_to product_path(product.id) do %>
         <div class='product-img-content'>
-          <%= image_tag product.image, class: "product-img" %>
+          <%= image_tag product.images[0], class: "product-img" %>
 
           <% if product.order %>
             <div class='sold-out'>

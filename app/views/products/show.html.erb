@@ -7,7 +7,13 @@
       <%= @product.product_name %>
     </h2>
     <div class="product-img-content">
-      <%= image_tag @product.image ,class:"product-box-img" %>
+      <%= image_tag @product.images[0], class:"images" %>
+
+      <div class="product-other-img">
+        <% @product.images.each do |image| %>
+          <%= image_tag image, class:'images-mini' %>
+        <% end %>
+      </div>
 
       <%# 売り切れ表示%>
       <% if @product.order %>

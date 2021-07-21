@@ -81,7 +81,7 @@
 }
 
 .click-upload {
-  margin: 15px 0;
+  margin-right: 300px;
   min-width: 250px;
 }
 
@@ -226,4 +226,27 @@
 
 .inc {
   font-size: 13px;
+}
+
+.image-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.image {
+  width: 100px;
+  height: 80px;
+}
+
+.images {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.other-image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 3vh 0;
 }
