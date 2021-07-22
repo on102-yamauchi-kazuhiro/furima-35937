@@ -6,7 +6,8 @@ class ProductsTag
   with_options presence: true do
     validates :product_name
     validates :tag_name
-
+  end
+  
   def save
     product = Product.create
     tag = Tag.where(tag_name: tag_name).first_or_initialize
@@ -14,5 +15,4 @@ class ProductsTag
 
     ProductTagRelation.create(product_id: product.id, tag_id: tag.id)
   end
-
 end
