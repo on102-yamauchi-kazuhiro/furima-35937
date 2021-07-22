@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   # localhost:3000にアクセスしたときにproductsコントローラーのindexアクションをうごかすための記述を書く。
   root to: 'products#index'
   resources :products do
-    resources :orders, only: [:index, :create] do
-      collection do
-        get 'search'
-      end
+    collection do
+      get 'search'
     end
+    resources :orders, only: [:index, :create]
   end
 end
