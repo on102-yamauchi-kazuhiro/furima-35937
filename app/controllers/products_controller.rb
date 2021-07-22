@@ -25,8 +25,9 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
-      redirect_to product_path(@product)
+    @product_tag = ProductTags.new(product_params)
+    if @product_tag.update(product_params, @product)
+      redirect_to root_path
     else
       render :edit
     end
@@ -39,7 +40,20 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to root_path
   end
-  
+
+  def product_search
+    @posts = Product.search(params[:search])
+    @products = @p.result.includes(:user)
+    Product.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render :product_search
+  end
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"])
+    render json:{ keyword: tag }
+  end
+
   private
 
   def product_params
