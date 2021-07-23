@@ -250,17 +250,3 @@
   justify-content: center;
   margin: 3vh 0;
 }
-
-.product-tag {
-  display: flex;
-  font-weight: bold;
-  min-width: 100px;
-  margin-bottom: 10px
-}
-
-.product-tags-search {
-  display: flex;
-  font-weight: bold;
-  min-width: 100px;
-  margin-bottom: 10px
-}
